@@ -1,2 +1,11 @@
-#!/bin/bash
-echo -e '#include "betty.h"\n\nint main(void)\n{\n\tputs("Programming is like building a multilingual puzzle");\n\treturn (0);\n}' > program.c
+#include <stdio.h> 
+
+int main() {
+    /*
+     * Use the puts function to print the message to the console.
+     * The puts function automatically appends a newline character.
+     */
+    puts("Programming is like building a multilingual puzzle");
+
+    return 0; /* Return 0 to indicate successful program execution */
+}
