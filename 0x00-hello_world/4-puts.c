@@ -1,2 +1,2 @@
-echo '#include <stdio.h>' > program.c
-echo 'int main() { puts("Programming is like building a multilingual puzzle"); return 0; }' >> program.c
+#!/bin/bash
+echo -e '#include "betty.h"\n\nint main(void)\n{\n\tputs("Programming is like building a multilingual puzzle");\n\treturn (0);\n}' > program.c
