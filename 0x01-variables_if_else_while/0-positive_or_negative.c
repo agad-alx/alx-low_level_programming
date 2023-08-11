@@ -9,23 +9,21 @@
  */
 int main(void)
 {
-	int n;
+    int n;
 
-	srand(time(0));
-	n = rand() - RAND_MAX / 2;
+    srand(time(0));
+    n = rand() - RAND_MAX / 2;
 
-	/* Print the generated number */
-	printf("The number %d is ", n);
+    /* Print the generated number */
+    printf("%d is ", n);
 
-	/* Check if the number is positive, zero, or negative */
-	if (n > 0)
-		printf("positive");
-	else if (n == 0)
-		printf("zero");
-	else
-		printf("negative");
+    /* Check if the number is positive, zero, or negative */
+    if (n > 0)
+        printf("positive\n");
+    else if (n == 0)
+        printf("zero\n");
+    else
+        printf("negative\n");
 
-	printf("\n");
-
-	return (0);
+    return (0);
 }
