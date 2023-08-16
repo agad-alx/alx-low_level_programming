@@ -1,31 +1,31 @@
 #include <stdio.h>
 
 /**
- * main - Entry point
+ * main - Entry point of the program
  *
- * Return: Always 0.
+ * Return: Always 0 (success)
  */
 int main(void)
 {
-	unsigned long int a = 0, b = 1, c = 1, sum = 0;
-	int i;
+	int count, fib1, fib2, fib3;
 
-	for (i = 1; i <= 98; i++)
+	fib1 = 1;
+	fib2 = 2;
+
+	printf("%d, %d, ", fib1, fib2);
+
+	for (count = 3; count <= 98; count++)
 	{
-		if (c % 2 == 0)
-			sum += c;
+		fib3 = fib1 + fib2;
+		printf("%d", fib3);
 
-		printf("%lu", c);
+		if (count != 98)
+			printf(", ");
 
-		if (i < 98)
-			printf(",\t");
-
-		c = a + b;
-		a = b;
-		b = c;
+		fib1 = fib2;
+		fib2 = fib3;
 	}
 
-	printf("\nSum of even-valued terms:\t%lu\n", sum);
-
+	printf("\n");
 	return (0);
 }
