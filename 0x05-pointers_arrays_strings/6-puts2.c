@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * puts2 - function should print only one character out of two
+ * puts2 - this function should print only one character out of two
  * starting with the first one
  * @str: input
  * Return: print
@@ -18,7 +18,7 @@ void puts2(char *str)
 		longi++;
 	}
 	x = longi - 1;
-	for (z = 0 ; z <= t ; z++)
+	for (z = 0 ; z <= x ; z++)
 	{
 		if (z % 2 == 0)
 	{
