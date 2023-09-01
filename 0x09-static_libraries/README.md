@@ -20,5 +20,6 @@ Static libraries in C (often referred to as "archive files" or simply "static li
 
 6. Linking with Static Libraries: To link a program with a static library, you typically use the -l flag followed by the library name when compiling. For example, to link with libexample.a, you might use the command:
 > gcc -o myprogram myprogram.c -lexample
+
 Static libraries are a fundamental part of C development and are widely used for organizing and reusing code in various C-based software projects.
 
