@@ -13,12 +13,12 @@ Static libraries in C (often referred to as "archive files" or simply "static li
 * Performance: Static linking can result in faster startup times and reduced runtime overhead because there's no need to load shared libraries dynamically.
 * Isolation: Each program can use its own version of a static library without affecting other programs on the same system.
 
-5. *Disadvantages:*
+5. _Disadvantages:_
 
-* *Larger Executables:* Static linking can lead to larger executable files since each program that uses the library includes its own copy of the library code.
-* *Less Sharing:* Because each program has its own copy of the library, updates or bug fixes to the library require recompilation and redistribution of all affected programs.
+* _Larger Executables:_ Static linking can lead to larger executable files since each program that uses the library includes its own copy of the library code.
+* _Less Sharing:_ Because each program has its own copy of the library, updates or bug fixes to the library require recompilation and redistribution of all affected programs.
 
-6. *Linking with Static Libraries:* To link a program with a static library, you typically use the -l flag followed by the library name when compiling. For example, to link with libexample.a, you might use the command:
+6. _Linking with Static Libraries:_ To link a program with a static library, you typically use the -l flag followed by the library name when compiling. For example, to link with libexample.a, you might use the command:
 > gcc -o myprogram myprogram.c -lexample
 
 Static libraries are a fundamental part of C development and are widely used for organizing and reusing code in various C-based software projects.
