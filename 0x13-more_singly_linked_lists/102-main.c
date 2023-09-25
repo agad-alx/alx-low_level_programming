@@ -5,9 +5,16 @@
 
 /**
  * main - check the code
+ * print_nil - Prints (nil), (nil)
  *
  * Return: Always 0.
+ * 
  */
+void print_nil()
+{
+	printf("(nil), (nil)\n");
+}
+
 int main(void)
 {
 	listint_t *head;
@@ -39,7 +46,7 @@ int main(void)
 	free_listint_safe(&head2);
 	free_listint_safe(&head);
 
-	printf("%p, %p\n", (void *)head2, (void *)head);
+	print_nil();
 
 	return (0);
 }
