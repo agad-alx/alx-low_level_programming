@@ -3,79 +3,90 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#define BUFFER_SIZE 1024
+#define BUF_SIZE 1024
 
 /**
- * exit_with_error - Exits the program with an error code
- * and prints an error message.
- * @code: The error code to exit with.
- * @message: The error message to print.
+ * exit_with_error - Print an error message
+ * and exit with a specific code
+ * @exit_code: The exit code
+ * @message: The error message to display
+ * Return: The exit_code
  */
-void exit_with_error(int code, const char *message)
+int exit_with_error(int exit_code, const char *message)
 {
 	dprintf(STDERR_FILENO, "%s\n", message);
-	exit(code);
+	return (exit_code);
 }
 
 /**
- * copy_file - Copies the content of one file to another file.
- * @src_filename: The source file name.
- * @dest_filename: The destination file name.
+ * copy_file - Copy the content of one file to another
+ * @file_from: The source file
+ * @file_to: The destination file
+ * Return: 0 on success
+ * appropriate exit code on failure
  */
-void copy_file(const char *src_filename, const char *dest_filename)
+int copy_file(const char *file_from, const char *file_to)
 {
-	int fd_from, fd_to;
-	ssize_t bytes_read, bytes_written;
-	char buffer[BUFFER_SIZE];
+	int fd_from, fd_to, bytes_read, bytes_written;
+	char buffer[BUF_SIZE];
 
-	fd_from = open(src_filename, O_RDONLY);
+	fd_from = open(file_from, O_RDONLY);
 	if (fd_from == -1)
-	{
-		exit_with_error(98, "Error: Can't read from source file");
-	}
+		return (exit_with_error(98, "Error: Can't read from file NAME_OF_THE_FILE"));
 
-	fd_to = open(dest_filename, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (fd_to == -1)
 	{
-		exit_with_error(99, "Error: Can't write to destination file");
+		close(fd_from);
+		return (exit_with_error(99, "Error: Can't write to NAME_OF_THE_FILE"));
 	}
 
-	while ((bytes_read = read(fd_from, buffer, BUFFER_SIZE)) > 0)
+	while ((bytes_read = read(fd_from, buffer, BUF_SIZE)) > 0)
 	{
 		bytes_written = write(fd_to, buffer, bytes_read);
 		if (bytes_written != bytes_read)
 		{
-			exit_with_error(99, "Error: Can't write to destination file");
+			close(fd_from);
+			close(fd_to);
+			return (exit_with_error(99, "Error: Can't write to NAME_OF_THE_FILE"));
 		}
 	}
 
 	if (bytes_read == -1)
 	{
-		exit_with_error(98, "Error: Can't read from source file");
+		close(fd_from);
+		close(fd_to);
+		return (exit_with_error(98, "Error: Can't read from file NAME_OF_THE_FILE"));
 	}
 
 	if (close(fd_from) == -1 || close(fd_to) == -1)
-	{
-		exit_with_error(100, "Error: Can't close file descriptor");
-	}
+		return (exit_with_error(100, "Error: Can't close fd FD_VALUE"));
+
+	return (0);
 }
 
 /**
- * main - Entry point of the program.
- * @argc: The number of command-line arguments.
- * @argv: An array of command-line argument strings.
- *
+ * main - Entry point of the program
+ * @argc: The argument count
+ * @argv: The argument vector
  * Return: 0 on success
- * or exit with error codes as specified.
+ * 97 if incorrect arguments
  */
+#include "main.h"
+
 int main(int argc, char *argv[])
 {
+	const char *file_from;
+	const char *file_to;
+	int result;
+
 	if (argc != 3)
-	{
-		exit_with_error(97, "Usage: cp file_from file_to");
-	}
+		return (exit_with_error(97, "Usage: cp file_from file_to"));
 
-	copy_file(argv[1], argv[2]);
+	file_from = argv[1];
+	file_to = argv[2];
 
-	return (0);
+	result = copy_file(file_from, file_to);
+
+	return (result);
 }
